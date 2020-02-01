@@ -11,9 +11,9 @@ class App extends React.Component {
         selectedVideo: null
     }
 
-    //sets default video when page loads first
+    //sets default video(term) when page first loads
     componentDidMount() {
-        this.onTermSubmit('cars')
+        this.onTermSubmit('lucas vullo')
     }
 
     onTermSubmit = async(term) => {
@@ -26,7 +26,7 @@ class App extends React.Component {
         // console.log(response.data.items)
         this.setState({
             videos: response.data.items,
-            //sets default video after search to first video from data received
+            //sets default video in bigger screen after search to first video from data received
             selectedVideo: response.data.items[0]
         })
     }
@@ -36,7 +36,6 @@ class App extends React.Component {
         this.setState({selectedVideo: video})
 
     }
-
 
     render() {
         return (
