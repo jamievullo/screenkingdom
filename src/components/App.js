@@ -11,6 +11,11 @@ class App extends React.Component {
         selectedVideo: null
     }
 
+    //sets default video when page loads first
+    componentDidMount() {
+        this.onTermSubmit('cars')
+    }
+
     onTermSubmit = async(term) => {
         // console.log(term)
         const response = await youtube.get('/search', {
@@ -19,7 +24,11 @@ class App extends React.Component {
             }
         })
         // console.log(response.data.items)
-        this.setState({videos: response.data.items})
+        this.setState({
+            videos: response.data.items,
+            //sets default video after search to first video from data received
+            selectedVideo: response.data.items[0]
+        })
     }
 
     onVideoSelect = (video) => {
