@@ -4,13 +4,19 @@ import youtube from '../apis/youtube';
 
 class App extends React.Component {
 
-    onTermSubmit = (term) => {
+    state = {
+        videos: []
+    }
+
+    onTermSubmit = async(term) => {
         // console.log(term)
-        youtube.get('/search', {
+        const response = await youtube.get('/search', {
             params: {
                 q: term
             }
-        });
+        })
+        // console.log(response.data.items)
+        this.setState({videos: response.data.items})
     }
 
 
@@ -18,6 +24,7 @@ class App extends React.Component {
         return (
         <div className="ui container">
             <SearchBar onTermSubmit={this.onTermSubmit} />
+            I have {this.state.videos.length} videos!
         </div>
         )
     }
